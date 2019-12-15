@@ -4,14 +4,23 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/PanOrange/square.git"
   },
-  "keywords": ["game", "typescript"],
+  "keywords": [
+    "game",
+    "typescript"
+  ],
   "author": "",
   "license": "ISC",
-  "homepage": "https://github.com/PanOrange/square.git"
+  "homepage": "https://github.com/PanOrange/square.git",
+  "devDependencies": {
+    "ts-loader": "6.2.1",
+    "typescript": "3.7.3",
+    "webpack": "4.41.2",
+    "webpack-cli": "3.3.10"
+  }
 }
