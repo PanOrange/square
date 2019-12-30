@@ -1,0 +1,19 @@
+$grid-size: 240px
+$font-primary: "'Open Sans', sans-serif"
+
+.main-grid
+  width: $grid-size
+  height: $grid-size
+  margin: 100px auto 0
+  display: grid
+  grid-template-columns: repeat(3, 1fr)
+  grid-gap: 2px
+
+.cell
+  display: flex
+  align-items: center
+  justify-content: center
+  font-family: $font-primary
+  font-size: 38px
+  background-color: #eeeeee
+

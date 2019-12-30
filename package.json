@@ -2,9 +2,12 @@
   "name": "square",
   "description": "",
   "version": "0.0.1",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "debug": "webpack --display-error-details webpack.config.js",
+    "start:dev": "webpack-dev-server",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -18,9 +21,20 @@
   "license": "ISC",
   "homepage": "https://github.com/PanOrange/square.git",
   "devDependencies": {
+    "@types/jest": "^24.0.25",
+    "@types/lodash": "^4.14.149",
+    "@types/node-sass": "^4.11.0",
+    "css-loader": "^3.3.2",
+    "jest": "^24.9.0",
+    "lodash": "4.17.15",
+    "node-sass": "4.13.0",
+    "sass-loader": "8.0.0",
+    "style-loader": "^1.0.1",
+    "ts-jest": "^24.2.0",
     "ts-loader": "6.2.1",
     "typescript": "3.7.3",
-    "webpack": "4.41.2",
-    "webpack-cli": "3.3.10"
+    "webpack": "^4.41.2",
+    "webpack-cli": "3.3.10",
+    "webpack-dev-server": "^3.9.0"
   }
 }
