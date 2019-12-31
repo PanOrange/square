@@ -10,7 +10,7 @@ export class Area {
   constructor(size: number = 3){
     this.size = size;
   }
-  init() {
+  public init(): void {
     const area = [];
 
     for (let i = 1; i <= this.size; i++) {
@@ -26,16 +26,19 @@ export class Area {
     this.area[0][0] = 4;
     this.area[0][1] = 2;
     this.area[0][2] = 2;
-    this.area[1][0] = 4;
-    this.area[1][2] = 2;
+    this.area[1][0] = 2;
+    this.area[1][1] = 2;
+    this.area[1][2] = 4;
     this.area[2][0] = 8;
     this.area[2][2] = 8;
     console.log('INIT ', this.area);
   }
 
-  leftAction() {
+  public leftAction(): void {
     let cellValue: number;
-    this.area.map((row, index, area) => {
+    let preventDouble: number;
+    this.area.map((row) => {
+      preventDouble = null;
       for (let i = FIRST; i < row.length; i++) {
         cellValue = row[i];
 
@@ -45,9 +48,10 @@ export class Area {
             if (row[j - 1] === null) {
               row[j - 1] = cellValue;
               row[j] = null;
-            } else if (row[j - 1] === cellValue) {
+            } else if (row[j - 1] === cellValue && preventDouble !== j - 1) {
               row[j - 1] = cellValue * 2;
               row[j] = null;
+              preventDouble = j - 1;
               j = FIRST;
             } else {
               j = FIRST;
@@ -60,5 +64,40 @@ export class Area {
     });
 
     console.log('MOVE LEFT ', this.area);
+  }
+
+  public rightAction(): void {
+    let cellValue: number;
+    let LAST;
+    let preventDouble: number;
+    this.area.map((row) => {
+      LAST = row.length - 1;
+      preventDouble = null;
+      for (let i = LAST; i >= FIRST; i--) {
+        cellValue = row[i];
+
+        if (cellValue) {
+          // move Right
+          for (let j = i; j < LAST; j++) {
+            if (row[j + 1] === null) {
+              row[j + 1] = cellValue;
+              row[j] = null;
+            } else if (row[j + 1] === cellValue && preventDouble !== j + 1) {
+              row[j + 1] = cellValue * 2;
+              row[j] = null;
+              preventDouble = j + 1;
+              j = LAST;
+            } else {
+              j = LAST;
+            }
+          }
+        }
+      }
+
+      return row;
+    });
+
+    console.log('MOVE RIGHT ', this.area);
+
   }
 }

@@ -46,7 +46,7 @@ document.addEventListener('keydown', (event: KeyboardEvent) => {
     case 'ArrowUp':
       break;
     case 'ArrowRight':
-      //...
+      area.rightAction();
       break;
     case 'ArrowDown':
       //...
