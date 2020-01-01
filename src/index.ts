@@ -44,12 +44,13 @@ document.addEventListener('keydown', (event: KeyboardEvent) => {
 
   switch (key) {
     case 'ArrowUp':
+      area.upAction();
       break;
     case 'ArrowRight':
       area.rightAction();
       break;
     case 'ArrowDown':
-      //...
+      area.downAction();
       break;
     case 'ArrowLeft':
       area.leftAction();
