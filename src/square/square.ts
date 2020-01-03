@@ -1,8 +1,5 @@
 import { isEqual, isEqualWith } from 'lodash';
-
-const getRandomInt = (max: number): number => {
-  return Math.floor(Math.random() * Math.floor(max));
-};
+import { createArray, createMatrix, getRandomInt } from '../services/cell.service';
 
 export class Area {
   area: Array<any[]>;
@@ -12,7 +9,7 @@ export class Area {
   }
   public init(): void {
 
-    this.area = this.createMatrix(this.size);
+    this.area = createMatrix(this.size);
 
     //TODO randomize
     // this.area[0][0] = 2;
@@ -31,18 +28,22 @@ export class Area {
   public leftAction(): void {
     const matrix = this.area.map((row) => this.moveToStart(row.slice()));
 
-    // if (!isEqual(matrix, this.area)) {
-    //   this.addRandomCell();
-    // }
+    const customizer = (result: number[], source: number[]) => {
+      for (let i = 0; i < result.length; i++) {
+        if (!isEqual(result[i], source[i])) {
+          return false;
+        }
+      }
 
-    const customizer = (result, source) => {
-      const areEqual: boolean = true;
-
-      const q = result.values();
-      const notEqual = q.some((row, index) => !isEqual(row, source[index]));
+      return true;
     };
 
-    console.log('MOVE LEFT ', !isEqualWith(matrix, this.area, customizer), this.area, matrix);
+    if (!isEqualWith(matrix, this.area, customizer)) {
+      this.area = matrix.slice();
+      this.addRandomCell();
+    }
+
+    console.log('MOVE LEFT ', isEqualWith(matrix, this.area, customizer), this.area, matrix);
   }
 
   public rightAction(): void {
@@ -53,7 +54,7 @@ export class Area {
   }
 
   public downAction(): void {
-    const matrix = this.createMatrix(this.size);
+    const matrix = createMatrix(this.size);
 
     for (let i = 0; i < this.area.length; i++) {
       const column = this.moveToStart(this.area.map(item => item[i]).reverse()).reverse();
@@ -68,7 +69,7 @@ export class Area {
   }
 
   public upAction(): void {
-    const matrix = this.createMatrix(this.size);
+    const matrix = createMatrix(this.size);
 
     for (let i = 0; i < this.area.length; i++) {
       const column = this.moveToStart(this.area.map(item => item[i]));
@@ -110,27 +111,12 @@ export class Area {
     return row;
   }
 
-  private createMatrix(size: number): any[] {
-    const matrix = [];
-
-    for (let i = 1; i <= size; i++) {
-      const row = [];
-      for (let j = 1; j <= size; j++) {
-        row.push(null);
-      }
-      matrix.push(row);
-    }
-
-    return matrix;
-  }
-
   private addRandomCell() {
-    // refactor to abstract
-    let rowSourceIndexes = [0, 1, 2];
+    let rowSourceIndexes = createArray(this.size).map((i, index) => index);
 
     const setRandomCell = () => {
       if (!rowSourceIndexes.length) {
-        // supposed end of game
+        // supposed end of game but not really
         return;
       }
 
