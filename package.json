@@ -24,17 +24,17 @@
     "@types/jest": "^24.0.25",
     "@types/lodash": "^4.14.149",
     "@types/node-sass": "^4.11.0",
-    "css-loader": "^3.3.2",
+    "css-loader": "^6.7.3",
     "jest": "^24.9.0",
     "lodash": "4.17.15",
     "node-sass": "4.13.0",
-    "sass-loader": "8.0.0",
-    "style-loader": "^1.0.1",
+    "sass-loader": "13.2.0",
+    "style-loader": "^1.3.0",
     "ts-jest": "^24.2.0",
-    "ts-loader": "6.2.1",
+    "ts-loader": "9.4.2",
     "typescript": "3.7.3",
-    "webpack": "^4.41.2",
-    "webpack-cli": "3.3.10",
+    "webpack": "^5.75.0",
+    "webpack-cli": "5.0.1",
     "webpack-dev-server": "^3.9.0"
   }
 }
